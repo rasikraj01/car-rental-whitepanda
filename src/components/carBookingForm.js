@@ -1,14 +1,15 @@
 import React, {useEffect, useState} from 'react';
-import {useHistory, useParams} from 'react-router-dom';
+import {useHistory, useParams, Link} from 'react-router-dom';
 import {Formik, Field, Form} from 'formik';
-
+import Modal from 'react-modal';
 
 import {useSelector, useDispatch} from 'react-redux';
 import {booking} from '../actions/booking';
 
 function CarBookingForm() {
 
-	
+	let [showModal, setShowModal] = useState(false)
+
 	let history = useHistory();
 	let {id} = useParams()
 
@@ -18,9 +19,7 @@ function CarBookingForm() {
 	const toPreviousRoute = () => {
 		history.goBack()
 	}
-	const onBookingFormSubmit = (e) => {
-		e.preventDefault()
-	}
+
 	return (
 		<div>
 			<h1>Booking Details</h1>
@@ -69,6 +68,7 @@ function CarBookingForm() {
 					if(car.bookingDetails.isBooked == false){
 						data.id = car.id
 						dispatch(booking(data))
+						setShowModal(true)
 					}
 				}}
 			>
@@ -88,6 +88,13 @@ function CarBookingForm() {
 			</Formik>	
 			}
 				{(car.bookingDetails.isBooked) && <p>This car is already Booked</p>}
+
+				<Modal isOpen={showModal}>
+					<h3>Booking Confrimed !</h3>
+					<p>You have Booked <span>{car.carName}</span></p>
+					<p>for the duration <span>{car.bookingDetails.issueDate}</span>-<span>{car.bookingDetails.returnDate}</span></p>
+					<Link to='/'>Continue</Link>
+				</Modal>
 				<button onClick={toPreviousRoute}>Back</button>
 		</div>
   );
