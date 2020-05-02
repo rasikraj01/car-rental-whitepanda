@@ -2,14 +2,15 @@ import React from 'react';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 
 import CarList from './components/carList';
 import CarDetails from './components/carDetails';
 import CarBookingForm from './components/carBookingForm';
 
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 function App() {
 	return (

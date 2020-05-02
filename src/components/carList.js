@@ -7,7 +7,7 @@ function CarList() {
     const carList = useSelector(state => state.BookingReducer)
 
     return (
-        <div>
+        <div className="car-list">
             {carList.map((car, index) => {
             	return <CarCard key={car.id} car={car}/>
             })}

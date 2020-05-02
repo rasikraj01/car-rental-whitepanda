@@ -3,7 +3,6 @@ import {carRentalDetails} from './data.js';
 const BookingReducer = (state=carRentalDetails, action) => {
     switch(action.type){
         case 'BOOKING':
-            let newState = carRentalDetails
             carRentalDetails.forEach((car) => {
                 if(car.id == action.payload.id){
                     car.bookingDetails.isBooked = true
