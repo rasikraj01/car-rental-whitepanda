@@ -2,11 +2,19 @@ import React, {useEffect, useState} from 'react';
 import {useHistory, useParams} from 'react-router-dom';
 import {Formik, Field, Form} from 'formik';
 
+
+import {useSelector, useDispatch} from 'react-redux';
+import {booking} from '../actions/booking';
+
 function CarBookingForm() {
 
+	
 	let history = useHistory();
 	let {id} = useParams()
-	
+
+	const car = useSelector(state => state.BookingReducer.filter((car) => car.id == id))[0]
+	const dispatch = useDispatch()
+
 	const toPreviousRoute = () => {
 		history.goBack()
 	}
@@ -17,7 +25,8 @@ function CarBookingForm() {
 		<div>
 			<h1>Booking Details</h1>
 			<img alt="logo"/>
-			<Formik
+			{
+				!(car.bookingDetails.isBooked) && <Formik
 				initialValues={{name : "", phoneNumber: "", issueDate: "", returnDate: ""}}
 				validate={(values) => {
 					let errors = {}
@@ -57,7 +66,10 @@ function CarBookingForm() {
 					return errors
 				}}
 				onSubmit={(data) => {
-					console.log(data)
+					if(car.bookingDetails.isBooked == false){
+						data.id = car.id
+						dispatch(booking(data))
+					}
 				}}
 			>
 				{({values, errors, touched}) => (
@@ -73,7 +85,9 @@ function CarBookingForm() {
 						<button type="submit">BOOK NOW</button>
 					</Form>
 				)}
-			</Formik>
+			</Formik>	
+			}
+				{(car.bookingDetails.isBooked) && <p>This car is already Booked</p>}
 				<button onClick={toPreviousRoute}>Back</button>
 		</div>
   );

@@ -10,7 +10,7 @@ function CarDetails() {
         <div>
             CarDetails : {car[0].carName}
 
-            <BookNowButton id={id} isAvailable={!(car[0].bookingDetails.isBooked)}/>
+            <BookNowButton id={id} isAvailable={(car[0].bookingDetails.isBooked)}/>
             {!(car[0].bookingDetails.isBooked) && <p>Currently Unavailable X</p>}
         </div>
   );

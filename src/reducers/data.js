@@ -11,7 +11,7 @@ export const carRentalDetails = [
         "engineModel" :"Kappa 20212",
         "description" : "When it’s about excitement and sheer road dominance, the Swift certainly knows how to make its presence felt. Its Floating Roof Design, solid shoulder lines, rich side body sculpting and Precision Cut Alloy Wheels, all unite to create a machine that’s simply crafted to thrill.",
         "bookingDetails" : {
-            "isBooked" : true,
+            "isBooked" : false,
             "name" : "",
             "phoneNumber" : "",
             "issueDate" :"",
@@ -30,7 +30,7 @@ export const carRentalDetails = [
         "engineModel" :"Kappa 20212",
         "description" : "When it’s about excitement and sheer road dominance, the Swift certainly knows how to make its presence felt. Its Floating Roof Design, solid shoulder lines, rich side body sculpting and Precision Cut Alloy Wheels, all unite to create a machine that’s simply crafted to thrill.",
         "bookingDetails" : {
-            "isBooked" : false,
+            "isBooked" : true,
             "name" : "",
             "phoneNumber" : "",
             "issueDate" :"",
@@ -49,7 +49,7 @@ export const carRentalDetails = [
         "engineModel" :"Kappa 20212",
         "description" : "When it’s about excitement and sheer road dominance, the Swift certainly knows how to make its presence felt. Its Floating Roof Design, solid shoulder lines, rich side body sculpting and Precision Cut Alloy Wheels, all unite to create a machine that’s simply crafted to thrill.",
         "bookingDetails" : {
-            "isBooked" : true,
+            "isBooked" : false,
             "name" : "",
             "phoneNumber" : "",
             "issueDate" :"",
