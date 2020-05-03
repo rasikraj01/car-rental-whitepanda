@@ -2,6 +2,12 @@
 
 .book-button-container{
     height: 30px;
+
+
+    @media only screen and (max-width: 500px){
+        margin: 20px 0;
+    }
+
     .book-now{
         color: white;
         font-size: 15px;
@@ -19,6 +25,16 @@
         &:hover{
             cursor: pointer;
         }
+        @media only screen and (max-width: 1300px){
+            width: 70px;
+            font-size: 12px;
+        }
+
+        @media only screen and (max-width: 500px){
+            width: 100px;
+            font-size: 15px;
+        }
+
     }
     .currently-unavailable{
         margin-top: 5px;

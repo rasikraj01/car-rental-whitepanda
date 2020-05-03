@@ -120,7 +120,7 @@ function CarBookingForm() {
 
 					<Modal style={customModalStyles} isOpen={showModal}>
 						<div className="modal-content-container">
-							<h3>Booking Confrimed !</h3>
+							<h3>Booking Confirmed !</h3>
 							<p>You have Booked <span>{car.carName}</span></p>
 							<p>For the duration <span>{car.bookingDetails.issueDate}</span>-<span>{car.bookingDetails.returnDate}</span></p>
 						</div>

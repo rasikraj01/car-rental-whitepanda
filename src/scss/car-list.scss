@@ -30,6 +30,11 @@
         .title-rent{
             grid-column: 6/8;
             justify-self: start;
+
+            
+        }
+        @media only screen and (max-width: 500px){
+            display: none;
         }
     }
 }

@@ -21,7 +21,7 @@ export const carRentalDetails = [
     {
         "id": 234,
         "carName" : "Ford EcoSport",
-        "imageUrl" : "https://www.india.ford.com/content/dam/Ford/website-assets/ap/in/nameplate/ecosport/gallery-new/exterior%20overlays/Technology-overlay.jpg",
+        "imageUrl" : "https://stimg.cardekho.com/images/carexteriorimages/630x420/Ford/Ecosport/7347/1579861367280/front-left-side-47.jpg?tr=w-456,e-sharpen",
         "maxCapacity" :"5", 
         "rent" : "650",
         'color' :'Brown',
@@ -59,7 +59,7 @@ export const carRentalDetails = [
     {
         "id": 567,
         "carName" : "Honda City",
-        "imageUrl" : "https://www.hondacarindia.com/areas/city/content/desktop/images/new-honda-city.jpg",
+        "imageUrl" : "https://stimg.cardekho.com/images/carexteriorimages/630x420/Honda/City/7259/1588064871072/front-left-side-47.jpg?tr=w-456,e-sharpen",
         "maxCapacity" :"4", 
         "rent" : "400",
         'color' :'silver',
