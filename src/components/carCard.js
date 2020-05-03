@@ -22,7 +22,7 @@ function CarCard(props) {
                 </div>
                 <div className="max-capacity">
                     <FontAwesomeIcon icon={faMale}/>
-                    <span>{props.car.maxCapacity}</span>
+                    <span>{props.car.maxCapacity} Seater</span>
                 </div>
             </div>
             <div className="rent">
