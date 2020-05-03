@@ -1,3 +1,5 @@
+@import 'variables';
+
 .book-button-container{
     height: 30px;
     .book-now{
@@ -9,10 +11,10 @@
         outline: none;
         border: none;
         border-radius: 2px;
-        background-color: black;
+        background-color: $black;
 
         &:disabled{
-            background: grey;
+            background: $light-grey;
         }
         &:hover{
             cursor: pointer;
@@ -21,6 +23,6 @@
     .currently-unavailable{
         margin-top: 5px;
         font-size: 10px;
-        color: red;
+        color: $red;
     }
 }

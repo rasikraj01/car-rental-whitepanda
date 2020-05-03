@@ -1,3 +1,5 @@
+@import 'variables';
+
 .car-booking-form-container{
     height: 100vh;
     display: flex;
@@ -36,17 +38,17 @@
                     font-size: 15px;
                     width: 100%;
                     border: none;
-                    border-bottom: 2px solid red;
+                    border-bottom: 2px solid $light-grey;
                     padding: 5px 0;
                     background-color: none;
 
                     &:focus{
                         outline: none;
-                        border-bottom: 2px solid blue;
+                        border-bottom: 2px solid $light-green;
                     }
                 }
                 .error{
-                    color: red;
+                    color: $red;
                     padding-top: 5px;
                     font-size: 12px;
                 }
@@ -60,14 +62,23 @@
                     font-size: 15px;
                     font-weight: 500;
                     padding: 0 20px;
+                    background-color: none;
+
+                    &:focus{
+                        outline: none;
+                    }
                 }
                 .submit{
                     font-size: 15px;
                     font-weight: 500;
                     padding: 10px 20px;
-                    color: white;
-                    background-color: black;
+                    color: $white;
+                    background-color: $black;
                     border-radius: 5px;
+
+                    &:focus{
+                        outline: none;
+                    }
                 }
             }
         }
@@ -84,7 +95,7 @@
         .modal-content-container{
             margin-left: 40%;
             h3{
-                color: black;
+                color: $black;
                 font-size: 30px;
                 padding : 10px 0;
             }
@@ -100,7 +111,7 @@
             position: absolute;
             bottom: 30px;
             right: 30px;
-            color: black;
+            color: $black;
             font-weight: 500;
             text-decoration: none;
         }

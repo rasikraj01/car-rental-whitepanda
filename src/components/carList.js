@@ -16,8 +16,8 @@ function CarList() {
                 <h2>Cars for rent</h2>
                 <hr/>
                 <div className="title">
-                    <div>Car Details</div>
-                    <div>RENT PER DAY</div>
+                    <div className="title-detail">Car Details</div>
+                    <div className="title-rent">RENT PER DAY</div>
                 </div>
                 {carList.map((car, index) => {
                     return <CarCard car={car} list={true}/>

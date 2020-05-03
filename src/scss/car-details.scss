@@ -1,3 +1,5 @@
+@import 'variables';
+
 .car-details{
     width: 80vw;
     margin: 20vh auto;
@@ -11,7 +13,6 @@
         grid-template-rows: repeat(4, 1fr);
     }
     figure{
-        background-color: red;
         grid-column: 1/4;
         grid-row: 1/5;
     }
@@ -22,7 +23,7 @@
         align-self: center;
         h3{
             font-size: 25px;
-            color: black;
+            color: $dark-grey;
             font-weight: 500;
             margin: 0;
             margin-bottom: 30px;
@@ -43,7 +44,7 @@
         align-self: start;
     }
     h3{
-        color: blue;
+        color: $green;
         font-size: 25px;
         font-weight: 500;
         margin-bottom: 10px;
@@ -51,15 +52,13 @@
     hr{
         border: 0;
         height: 0;
-        border-top: 2px solid rgba(0, 0, 0, 0.1);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        border-top: 2px solid $green;
     }
     .description{
         margin-top: 30px;
         button{
-            // height: 30px;
-            color: white;
-            background-color: grey;
+            color: $white;
+            background-color: $grey;
             outline: none;
             border: none;
             font-size: 15px;
@@ -79,14 +78,14 @@
     table{
         width: 100%;
         th{
-            color: blue;
+            color: $green;
             text-transform: uppercase;
             padding: 20px 0;
             font-weight: 400;
         }
         td{
             text-align: center;
-            padding: 20px 0;border-bottom: 1px #e3e3e3 solid;
+            padding: 20px 0;border-bottom: 1px $light-grey solid;
         }
     }
 }

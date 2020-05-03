@@ -1,17 +1,22 @@
+@import 'variables';
+
 footer{
     width: 80vw;
     margin: auto;
     h2{
         font-size: 25px;
         font-weight: 400;
+        color : $black;
     }
     p{
         font-size: 15px;
         margin: 20px 0;
+        color : $black;
     }
     .address{
         p{
             margin: 10px 0;
+            color : $black;
         }
     }
     .social-media{
@@ -20,6 +25,7 @@ footer{
         width: 200px;
         font-size: 20px;
         justify-content: space-between;
+        color : $black;
     }
     nav{
         width: 100%;
@@ -34,12 +40,14 @@ footer{
             li{
                 font-size: 15px;
                 padding-right: 25px;
+                color : $black;
             }
         }
         .right{
             li{
                 font-size: 10px;
                 padding-left: 25px;
+                color : $black;
             }
         }
     }
