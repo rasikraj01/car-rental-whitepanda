@@ -8,13 +8,17 @@ import {booking} from '../actions/booking';
 
 import '../scss/car-booking-form.scss';
 import logo from '../imgs/logo.png';
+import done from '../imgs/done.png';
 
 Modal.defaultStyles.overlay.backgroundColor = '#00000080';
 const customModalStyles = {
 	content : {
 		top : '50%',
 		left : '50%',
-		transform : 'translate(-50%, -50%)'
+		transform : 'translate(-50%, -50%)',
+		background : `url(${done})`,
+		backgroundSize: 'cover',
+		backgroundRepeat: 'no-repeat'
 	}
   }
 function CarBookingForm() {
