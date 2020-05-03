@@ -1,0 +1,26 @@
+.car-list{
+    width: 80vw;
+    margin: 15vh auto;
+    h2{
+        font-size: 30px;
+        font-weight: 500;
+        color: #000000;
+        padding-bottom: 20px;
+    }
+    hr{
+        border: 0;
+        height: 0;
+        border-top: 2px solid rgba(0, 0, 0, 0.1);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    }
+    .title{
+        margin: auto;
+        margin-top: 10vh;
+        width: 80%;
+        display: flex;
+        justify-content: space-around;
+        font-size: 14px;
+        color: grey;
+        font-weight: 500;
+    }
+}

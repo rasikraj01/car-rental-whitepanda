@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {useHistory, useParams, Link} from 'react-router-dom';
 import {Formik, Field, Form} from 'formik';
 import Modal from 'react-modal';
@@ -6,6 +6,17 @@ import Modal from 'react-modal';
 import {useSelector, useDispatch} from 'react-redux';
 import {booking} from '../actions/booking';
 
+import '../scss/car-booking-form.scss';
+import logo from '../imgs/logo.png';
+
+Modal.defaultStyles.overlay.backgroundColor = '#00000080';
+const customModalStyles = {
+	content : {
+		top : '50%',
+		left : '50%',
+		transform : 'translate(-50%, -50%)'
+	}
+  }
 function CarBookingForm() {
 
 	let [showModal, setShowModal] = useState(false)
@@ -21,81 +32,101 @@ function CarBookingForm() {
 	}
 
 	return (
-		<div>
-			<h1>Booking Details</h1>
-			<img alt="logo"/>
-			{
-				!(car.bookingDetails.isBooked) && <Formik
-				initialValues={{name : "", phoneNumber: "", issueDate: "", returnDate: ""}}
-				validate={(values) => {
-					let errors = {}
-					
-					// checks if fields are not empty
-					if(!values.name){
-						errors.name = 'name is required'
-					}
-					if(!values.phoneNumber){
-						errors.phoneNumber = 'phone number is required'
-					}
-					if(!values.issueDate){
-						errors.issueDate = 'issue date is required'
-					}
-					if(!values.returnDate){
-						errors.returnDate = 'returnDate is required'
-					}
-					
-					// chcek if name contains any number
-					if((/\d/.test(values.name))){
-						errors.name = `name can't contain numbers`
-					}
+		<div className="car-booking-form-container">
+			<div className="car-booking-form">
+				<div className="heading">
+					<h1>Booking Details</h1>
+					<img src={logo} alt="logo"/>
+				</div>
 
-					// checks if valid phone number
-					if(!(/^(?:(?:\+|0{0,2})91(\s*[\ -]\s*)?|[0]?)?[789]\d{9}$/.test(values.phoneNumber))){
-						errors.phoneNumber = 'enter a valid indian phone number'
-					}
-					// checks if issue date is not in past
-					if(values.issueDate < Date.now()){
-						errors.issueDate = `Invalid Issue Date`
-					}
-					// checks if return date is after issue date
-					if (values.returnDate < values.issueDate){
-						errors.returnDate = 'invalid Return Date'
-					}
+				{
+					!(car.bookingDetails.isBooked) && <Formik
+					initialValues={{name : "", phoneNumber: "", issueDate: "", returnDate: ""}}
+					validate={(values) => {
+						let errors = {}
+						
+						// chcek if name contains any number
+						if((/\d/.test(values.name))){
+							errors.name = `Name can't contain numbers`
+						}
 
-					return errors
-				}}
-				onSubmit={(data) => {
-					if(car.bookingDetails.isBooked == false){
-						data.id = car.id
-						dispatch(booking(data))
-						setShowModal(true)
-					}
-				}}
-			>
-				{({values, errors, touched}) => (
-					<Form>
-						<Field name="name" type="text" placeholder="Jon Doe"/>
-						{errors.name && touched.name ? (<div>{errors.name}</div>) : null}
-						<Field name="phoneNumber" type="text" placeholder="+91"/>
-						{errors.phoneNumber && touched.phoneNumber ? (<div>{errors.phoneNumber}</div>) : null}
-						<Field name="issueDate" type="date" placeholder="DD/MM/YYYY"/>
-						{errors.issueDate && touched.issueDate ? (<div>{errors.issueDate}</div>) : null}
-						<Field name="returnDate" type="date" placeholder="DD/MM/YYYY"/>
-						{errors.returnDate && touched.returnDate ? (<div>{errors.returnDate}</div>) : null}
-						<button type="submit">BOOK NOW</button>
-					</Form>
-				)}
-			</Formik>	
-			}
-				{(car.bookingDetails.isBooked) && <p>This car is already Booked</p>}
+						// // checks if valid phone number
+						if(!(/^(?:(?:\+|0{0,2})91(\s*[\ -]\s*)?|[0]?)?[789]\d{9}$/.test(values.phoneNumber))){
+							errors.phoneNumber = 'Enter a valid Indian phone number'
+						}
+						// // checks if issue date is not in past
+						if(values.issueDate < Date.now()){
+							errors.issueDate = `Invalid Issue Date`
+						}
+						// checks if return date is after issue date
+						if (values.returnDate < values.issueDate){
+							errors.returnDate = 'Invalid Return Date'
+						}
+						// // checks if fields are not empty
+						if(!values.name){
+							errors.name = 'Name is required'
+						}
+						if(!values.phoneNumber){
+							errors.phoneNumber = 'Phone number is required'
+						}
+						if(!values.issueDate){
+							errors.issueDate = 'Issue date is required'
+						}
+						if(!values.returnDate){
+							errors.returnDate = 'Return date is required'
+						}
 
-				<Modal isOpen={showModal}>
-					<h3>Booking Confrimed !</h3>
-					<p>You have Booked <span>{car.carName}</span></p>
-					<p>for the duration <span>{car.bookingDetails.issueDate}</span>-<span>{car.bookingDetails.returnDate}</span></p>
-					<Link to='/'>Continue</Link>
-				</Modal>
-				<button onClick={toPreviousRoute}>Back</button>
+						return errors
+					}}
+					onSubmit={(data) => {
+						if(car.bookingDetails.isBooked == false){
+							data.id = car.id
+							dispatch(booking(data))
+							setShowModal(true)
+						}
+					}}
+				>
+					{({values, errors, touched}) => (
+						<Form>
+							<div className="input-container">
+								<label>Name</label><br/>
+								<Field name="name" type="text" placeholder="Jon Doe"/>
+								{errors.name && touched.name ? (<div className="error">{errors.name}</div>) : null}
+							</div>
+							<div className="input-container">
+								<label>Phone Number</label><br/>
+								<Field name="phoneNumber" type="text" placeholder="+91"/>
+								{errors.phoneNumber && touched.phoneNumber ? (<div className="error">{errors.phoneNumber}</div>) : null}
+							</div>
+							<div className="input-container">
+								<label>Issue Date</label><br/>
+								<Field name="issueDate" type="date" placeholder="DD/MM/YYYY"/>
+								{errors.issueDate && touched.issueDate ? (<div className="error">{errors.issueDate}</div>) : null}
+							</div>
+							<div className="input-container">
+								<label>Return Date</label><br/>
+								<Field name="returnDate" type="date" placeholder="DD/MM/YYYY"/>
+								{errors.returnDate && touched.returnDate ? (<div className="error">{errors.returnDate}</div>) : null}
+							</div>
+							<div className="form-buttons">
+								<button className="back" onClick={toPreviousRoute}>Back</button>
+								<button className="submit" type="submit">Book Car</button>
+							</div>
+						</Form>
+					)}
+				</Formik>	
+				}
+					{(car.bookingDetails.isBooked) && <p className="already-booked">This car is already Booked</p>}
+
+					<Modal style={customModalStyles} isOpen={showModal}>
+						<div className="modal-content-container">
+							<h3>Booking Confrimed !</h3>
+							<p>You have Booked <span>{car.carName}</span></p>
+							<p>For the duration <span>{car.bookingDetails.issueDate}</span>-<span>{car.bookingDetails.returnDate}</span></p>
+						</div>
+						<Link to='/'>Continue</Link>
+					</Modal>
+			</div>
 		</div>
   );
 }

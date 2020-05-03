@@ -10,7 +10,7 @@ import CarDetails from './components/carDetails';
 import CarBookingForm from './components/carBookingForm';
 
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import './scss/reset.scss';
 
 function App() {
 	return (

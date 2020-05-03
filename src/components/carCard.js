@@ -1,16 +1,39 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import BookNowButton from './bookNowButton';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {faEyeDropper, faMale } from '@fortawesome/free-solid-svg-icons'
 
+
+import BookNowButton from './bookNowButton';
 import '../scss/car-card.scss';
 
 function CarCard(props) {
     let id = props.car.id.toString()
     return (
         <div className="car-card">
-            {props.car.carName}
-            <BookNowButton id={id} isAvailable={(props.car.bookingDetails.isBooked)}/>
-            <Link to={'/details/' + id}><button>Details</button></Link>
+            <figure>
+                <img src={props.car.imageUrl}/>
+            </figure>
+            <div className="brief">
+                <h3>{props.car.carName}</h3>
+                <div className="color">
+                    <FontAwesomeIcon icon={faEyeDropper}/>
+                    <span>{props.car.color}</span>
+                </div>
+                <div className="max-capacity">
+                    <FontAwesomeIcon icon={faMale}/>
+                    <span>{props.car.maxCapacity}</span>
+                </div>
+            </div>
+            <div className="rent">
+                {!(props.list) && <span>Rent per Day : </span>} &#8377; {props.car.rent}
+            </div>
+            <BookNowButton id={id} isBooked={(props.car.bookingDetails.isBooked)}/>
+
+            {
+                props.list && 
+                <Link to={'/details/' + id} className="details-link"><button>Details</button></Link>
+            }
         </div>
   );
 }

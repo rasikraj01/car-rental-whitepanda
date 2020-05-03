@@ -1,2 +1,70 @@
+@import 'variables';
+
 .car-card{
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    align-items: center;
+    align-content: center;
+    justify-self: center;
+    width : 80%;
+    margin: 30px auto;
+    height: 13vh;
+    overflow: hidden;
+    
+    border-radius: 10px;
+    border: 1px #e3e3e3 solid; 
+    figure{
+        // height: 100%;
+        grid-column: 1/3;
+        width: 100%;
+        img{
+            width: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+    .brief{
+        grid-column: 3/6;
+        margin: 0 20% 0 5%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-row-gap: 10px;
+        h3{
+            grid-column: 1/3;
+            font-weight: 400;
+            font-size: 15px;
+        }
+        .color, .max-capacity{
+            color: #e3e3e3;
+            span{
+                padding-left: 10px;
+            }
+        }
+    }
+    .rent{
+        grid-column: 6/7;
+        font-size: 15px;
+    }
+    .book-botton-container{
+        grid-column: 7/8;
+        align-self: center;
+    }
+    .details-link{
+        button{
+            color: grey;
+            font-size: 15px;
+            width: 70px;
+            height: 30px;
+            line-height: 30px;
+            outline: none;
+            border: none;
+            border-radius: 2px;
+            background-color: #e3e3e3;
+
+            &:hover{
+                cursor: pointer;
+            }
+        }
+
+    }
 }

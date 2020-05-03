@@ -1,0 +1,26 @@
+.book-button-container{
+    height: 30px;
+    .book-now{
+        color: white;
+        font-size: 15px;
+        width: 100px;
+        height: 30px;
+        line-height: 30px;
+        outline: none;
+        border: none;
+        border-radius: 2px;
+        background-color: black;
+
+        &:disabled{
+            background: grey;
+        }
+        &:hover{
+            cursor: pointer;
+        }
+    }
+    .currently-unavailable{
+        margin-top: 5px;
+        font-size: 10px;
+        color: red;
+    }
+}
