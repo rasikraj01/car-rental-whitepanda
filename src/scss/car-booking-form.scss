@@ -4,7 +4,7 @@
     height: 100vh;
     display: flex;
     align-items: center;
-    background-image: url('../imgs/background.png');
+    background-image: url('../imgs/background-min.png');
     background-size: cover;
 
     @media only screen and (max-width: 930px){
@@ -41,8 +41,14 @@
             grid-template-columns: repeat(2, 1fr);
             column-gap: 40px;
             margin-top: 10vh;
+
+            @media only screen and (max-width: 500px){
+                display: block;
+            }
+
             .input-container{
                 margin: 20px 0;
+
                 label{
                     display: block;
                     font-size: 15px;
@@ -54,7 +60,7 @@
                     border: none;
                     border-bottom: 2px solid $light-grey;
                     padding: 5px 0;
-                    background-color: none;
+                    background-color: $white;
 
                     &:focus{
                         outline: none;
@@ -65,6 +71,9 @@
                     color: $red;
                     padding-top: 5px;
                     font-size: 12px;
+                }
+                .react-datepicker-wrapper{
+                    width: 100%;
                 }
             }
             .form-buttons{

@@ -33,8 +33,8 @@ export const carRentalDetails = [
             "isBooked" : true,
             "name" : "Jon Doe",
             "phoneNumber" : "+91 8978987898",
-            "issueDate" :"2020-05-13",
-            "returnDate" :"2020-05-25",
+            "issueDate" :"13/05/2020",
+            "returnDate" :"25/05/2020",
         }
     },
     {
