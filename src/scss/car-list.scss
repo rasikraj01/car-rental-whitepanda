@@ -5,7 +5,7 @@
     margin: 15vh auto;
     h2{
         font-size: 30px;
-        font-weight: 500;
+        font-weight: 600;
         color: $black;
         padding-bottom: 20px;
     }
@@ -22,7 +22,7 @@
         grid-template-columns: repeat(8, 1fr);
         font-size: 14px;
         color: $grey;
-        font-weight: 500;
+        font-weight: 600;
         .title-detail{
             justify-self: center;
             grid-column: 1/6;

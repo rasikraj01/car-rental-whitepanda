@@ -7,7 +7,7 @@ function Header() {
 
     return (
         <div className="header">
-            <img src={logo} />
+            <img src={logo} alt="logo"/>
         </div>
   );
 }

@@ -12,7 +12,7 @@ function CarCard(props) {
     return (
         <div className="car-card">
             <figure>
-                <img src={props.car.imageUrl}/>
+                <img src={props.car.imageUrl} alt="car"/>
             </figure>
             <div className="brief">
                 <h3>{props.car.carName}</h3>
