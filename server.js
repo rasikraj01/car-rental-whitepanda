@@ -20,9 +20,6 @@ app.use(express.json());
 app.use('/api/', carRoutes);
 app.use('/api/', bookingRoutes);
 
-app.get('/', (req, res) => {
-    res.send({'test': 'ok'})
-})
 
 if (process.env.NODE_ENV === 'production') {
     // Serve any static files
