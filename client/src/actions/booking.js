@@ -4,3 +4,10 @@ export const booking = (payload) => {
         payload : payload
     }
 }
+
+export const deleteBooking = (payload) => {
+    return {
+        type : 'DELETE_BOOKING',
+        payload : payload
+    }
+}

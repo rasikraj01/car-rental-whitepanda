@@ -13,6 +13,14 @@ const BookingReducer = (state=[], action) => {
                 }
             })
             return state
+        case 'DELETE_BOOKING':
+            state.forEach((car) => {
+                if(car._id == action.payload._id){
+                    car.isBooked = false
+                    car.bookingDetails.pop()
+                }
+            })
+            return state
         case 'GET_DATA':
             return action.payload
             

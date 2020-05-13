@@ -11,6 +11,7 @@ import axios from 'axios';
 import CarList from './components/carList';
 import CarDetails from './components/carDetails';
 import CarBookingForm from './components/carBookingForm';
+import CarBookingUpdateForm from './components/carBookingUpdateForm';
 
 import './scss/reset.scss';
 
@@ -48,6 +49,9 @@ function App() {
 					</Route>
 					<Route exact path='/booking/:id'>
 						<CarBookingForm />
+					</Route>
+					<Route exact path='/booking/update/:id'>
+						<CarBookingUpdateForm />
 					</Route>
 				</Switch>
 			</Router>

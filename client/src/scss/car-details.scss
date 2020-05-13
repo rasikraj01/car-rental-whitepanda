@@ -146,7 +146,55 @@
         }
         td{
             text-align: center;
-            padding: 20px 0;border-bottom: 1px $light-grey solid;
+            padding: 20px 0;
+            border-bottom: 1px $light-grey solid;
+
+            .delete-button{
+                font-size: 15px;
+                color: white;
+                width: 100px;
+                height: 30px;
+                line-height: 30px;
+                outline: none;
+                border: none;
+                border-radius: 2px;
+                background-color: $red;
+                &:focus{
+                    outline: none;
+                }
+                &:hover{
+                    cursor: pointer;
+                }
+
+                @media only screen and (max-width: 500px){
+                    font-size: 12px;
+                    width: 50px;
+                }
+            }
+            .delete-button, .update-button button{
+                font-size: 15px;
+                color: white;
+                width: 100px;
+                height: 30px;
+                line-height: 30px;
+                outline: none;
+                border: none;
+                border-radius: 2px;
+                background-color: $red;
+                &:focus{
+                    outline: none;
+                }
+                &:hover{
+                    cursor: pointer;
+                }
+                @media only screen and (max-width: 500px){
+                    font-size: 12px;
+                    width: 50px;
+                }
+            }
+            .update-button button{
+                background-color: $black;
+            }
             @media only screen and (max-width: 500px){
                 font-size: 12px;
             }

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useHistory, useParams, Link} from 'react-router-dom';
-import {Formik, Field, Form, ErrorMessage} from 'formik';
+import {Formik, Field, Form, FastField, ErrorMessage} from 'formik';
 import Modal from 'react-modal';
 import moment from 'moment';
 import axios from 'axios';
@@ -30,7 +30,7 @@ const customModalStyles = {
 	}
   }
 
-function CarBookingForm() {
+function CarBookingUpdateForm() {
 
 	let [showModal, setShowModal] = useState(false)
 
@@ -49,22 +49,21 @@ function CarBookingForm() {
 			{(car !== undefined) ? 
 				<div className="car-booking-form">
 				<div className="heading">
-					<h1>Booking Details</h1>
+					<h1>Update Booking Details</h1>
 					<img src={logo} alt="logo"/>
 				</div>
 
-				{
-					!(car.isBooked) && <Formik
+			    <Formik
 					initialValues={{name : "", phoneNumber: "", issueDate: "", returnDate: ""}}
 					validate={async (values) => {
 						return await validateForm(values)
 					}}
 					onSubmit={(data) => {
 						data.issueDate = moment(data.issueDate).format('YYYY-MM-DD')
-						data.returnDate = moment(data.returnDate).format('YYYY-MM-DD')
-						// data = JSON.stringify(data)
-						if(car.isBooked == false){
-							axios.patch(`/api/car/${id}/book/`, data ).then((response) => {
+                        data.returnDate = moment(data.returnDate).format('YYYY-MM-DD')
+                        
+						if(car.isBooked == true){
+							axios.patch(`/api/car/${id}/book/update/`, data ).then((response) => {
 								console.log(response);
 								
 								dispatch(booking(response.data))
@@ -79,7 +78,7 @@ function CarBookingForm() {
 						<Form>
 							<div className="input-container">
 								<label>Name</label><br/>
-								<Field name="name" type="text" placeholder="Jon Doe"/>
+								<Field name="name" type="text" placeholder="Jon Doe" />
 								{errors.name && touched.name ? (<div className="error">{errors.name}</div>) : null}
 							</div>
 							<div className="input-container">
@@ -104,13 +103,13 @@ function CarBookingForm() {
 						</Form>
 					)}
 				</Formik>	
-				}
-					{(car.isBooked) && <p className="already-booked">This car is already Booked</p>}
+				
+                {!(car.isBooked) && <p className="already-booked">No Booking Made for this car.</p>}
 
 					<Modal style={customModalStyles} isOpen={showModal}>
 						{(car.isBooked) && 
 							<div className="modal-content-container">
-								<h3>Booking Confirmed !</h3>
+								<h3>Booking Updated !</h3>
 								<p>You have Booked <span>{car.carName}</span></p>
 								<p>For the duration 
 									<span>
@@ -129,4 +128,4 @@ function CarBookingForm() {
   );
 }
 
-export default CarBookingForm;
+export default CarBookingUpdateForm;
