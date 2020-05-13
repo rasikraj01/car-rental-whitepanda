@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
 import {useHistory, useParams, Link} from 'react-router-dom';
-import {Formik, Field, Form, ErrorMessage} from 'formik';
+import {Formik, Field, Form} from 'formik';
 import Modal from 'react-modal';
 import moment from 'moment';
 import axios from 'axios';
 
 import {useSelector, useDispatch} from 'react-redux';
-import {booking} from '../actions/booking';
+import {addBooking} from '../actions/booking';
 import DatePicker from "./datePicker";
 
 import validateForm from './validateForm';
@@ -64,14 +64,17 @@ function CarBookingForm() {
 						data.returnDate = moment(data.returnDate).format('YYYY-MM-DD')
 						// data = JSON.stringify(data)
 						if(car.isBooked == false){
-							axios.patch(`/api/car/${id}/book/`, data ).then((response) => {
-								console.log(response);
-								
-								dispatch(booking(response.data))
-								setShowModal(true)
-							}).catch((err) => {
-								console.log(err)
-							})
+							axios
+								.patch(`/api/car/${id}/book/`, data )
+								.then((response) => {
+									if(response.status === 200){
+										dispatch(addBooking(response.data))
+										setShowModal(true)
+									}
+								})
+								.catch((err) => {
+									console.log(err)
+								})
 						}
 					}}
 				>
@@ -124,7 +127,7 @@ function CarBookingForm() {
 						<Link to='/'>Continue</Link>
 					</Modal>
 			</div>
-			: <div className="car-booking-form">Loading...</div>}
+			: <div className="car-booking-form"><div className="loading">Loading...</div></div>}
 		</div>
   );
 }

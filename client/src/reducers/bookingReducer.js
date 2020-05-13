@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const BookingReducer = (state=[], action) => {
     switch(action.type){
-        case 'BOOKING':
+        case 'ADD_BOOKING':
 
         // update store booking
             state.forEach((car) => {
@@ -18,6 +18,13 @@ const BookingReducer = (state=[], action) => {
                 if(car._id == action.payload._id){
                     car.isBooked = false
                     car.bookingDetails.pop()
+                }
+            })
+            return state
+        case 'UPDATE_BOOKING':
+            state.forEach((car) => {
+                if(car._id === action.payload._id && car.isBooked === true){
+                    car.bookingDetails[0] = action.payload.bookingDetails[0]
                 }
             })
             return state

@@ -76,7 +76,7 @@ function CarDetails() {
                     </table>
                 </div>
 
-            : <div className="car-details">Loading...</div>}
+            : <div className="car-details"><div className="loading">Loading...</div></div>}
             <Footer/>
         </div>
   );

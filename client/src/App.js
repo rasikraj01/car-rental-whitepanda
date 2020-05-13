@@ -24,8 +24,10 @@ function App() {
 		// update the store initially
 		axios
 			.get('/api/car/list')
-			.then((data)=>{
-				dispatch(get_data(data.data))
+			.then((response)=>{
+				if(response.status === 200){
+					dispatch(get_data(response.data))
+				}
 			})
 			.catch( (err) => {
 				if(axios.isCancel(err)){

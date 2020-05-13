@@ -6,10 +6,10 @@ const Car = require('../models/car');
 router.patch('/car/:id/book/', async (req, res) => {
     let isAlreadyBooked = await Car.findOne({_id : req.params.id})
 
-    if (isAlreadyBooked === null) res.status(400).send("no item found")
+    if (isAlreadyBooked === null) res.status(400).send({"message" : "No item found"})
     if(isAlreadyBooked.isBooked) 
     {
-        res.status(400).send("Car is already Booked")
+        res.status(400).send({"message": "Car is already Booked"})
     }
     else{
         try{
@@ -72,7 +72,7 @@ router.delete('/car/:id/book/', async (req, res) => {
     let currentCar = await Car.findOne({_id : req.params.id})
     let bookingId =  currentCar.bookingDetails[0]._id
 
-    if (currentCar === null) res.status(400).send("no item found")
+    if (currentCar === null) res.status(400).send({"message" : "No item found"})
     
     if(currentCar.isBooked){
         try{
