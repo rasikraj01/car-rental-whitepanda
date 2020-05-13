@@ -8,7 +8,7 @@ const bookingDetailsSchema = new mongoose.Schema({
         max: 255
     },
     phoneNumber : {
-        type : Number,
+        type : String,
         required: true
     },
     issueDate : {
