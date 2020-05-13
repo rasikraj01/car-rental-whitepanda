@@ -20,7 +20,7 @@ function CarList() {
                     <div className="title-rent">RENT PER DAY</div>
                 </div>
                 {carList.map((car, index) => {
-                    return <CarCard car={car} list={true}/>
+                    return <CarCard car={car} list={true} isBooked={car.isBooked} key={car._id}/>
                 })}
             </div>
             <Footer/>

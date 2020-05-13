@@ -1,18 +1,21 @@
-import {carRentalDetails} from './data.js';
+// import {carRentalDetails} from './data.js';
+import axios from 'axios';
 
-const BookingReducer = (state=carRentalDetails, action) => {
+const BookingReducer = (state=[], action) => {
     switch(action.type){
         case 'BOOKING':
-            carRentalDetails.forEach((car) => {
-                if(car.id == action.payload.id){
-                    car.bookingDetails.isBooked = true
-                    car.bookingDetails.name = action.payload.name
-                    car.bookingDetails.phoneNumber = action.payload.phoneNumber
-                    car.bookingDetails.issueDate = action.payload.issueDate
-                    car.bookingDetails.returnDate = action.payload.returnDate
+
+        // update store booking
+            state.forEach((car) => {
+                if(car._id == action.payload._id){
+                    car.isBooked = true
+                    car.bookingDetails.push(action.payload.bookingDetails[0])
                 }
             })
-            return carRentalDetails
+            return state
+        case 'GET_DATA':
+            return action.payload
+            
         default:
             return state
     }

@@ -8,7 +8,7 @@ import BookNowButton from './bookNowButton';
 import '../scss/car-card.scss';
 
 function CarCard(props) {
-    let id = props.car.id.toString()
+    let id = props.car._id.toString()
     return (
         <div className="car-card">
             <figure>
@@ -28,7 +28,7 @@ function CarCard(props) {
             <div className="rent">
                 {!(props.list) && <span>Rent per Day : </span>} &#8377; {props.car.rent}
             </div>
-            <BookNowButton id={id} isBooked={(props.car.bookingDetails.isBooked)}/>
+            <BookNowButton id={id} isBooked={(props.car.isBooked)}/>
 
             {
                 props.list && 

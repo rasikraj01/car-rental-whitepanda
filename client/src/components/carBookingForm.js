@@ -3,6 +3,7 @@ import {useHistory, useParams, Link} from 'react-router-dom';
 import {Formik, Field, Form, ErrorMessage} from 'formik';
 import Modal from 'react-modal';
 import moment from 'moment';
+import axios from 'axios';
 
 import {useSelector, useDispatch} from 'react-redux';
 import {booking} from '../actions/booking';
@@ -34,7 +35,7 @@ function CarBookingForm() {
 	let history = useHistory();
 	let {id} = useParams()
 
-	const car = useSelector(state => state.BookingReducer.filter((car) => car.id == id))[0]
+	const car = useSelector(state => state.BookingReducer.filter((car) => car._id == id))[0]
 	const dispatch = useDispatch()
 
 	const toPreviousRoute = () => {
@@ -43,14 +44,15 @@ function CarBookingForm() {
 
 	return (
 		<div className="car-booking-form-container">
-			<div className="car-booking-form">
+			{(car !== undefined) ? 
+				<div className="car-booking-form">
 				<div className="heading">
 					<h1>Booking Details</h1>
 					<img src={logo} alt="logo"/>
 				</div>
 
 				{
-					!(car.bookingDetails.isBooked) && <Formik
+					!(car.isBooked) && <Formik
 					initialValues={{name : "", phoneNumber: "", issueDate: "", returnDate: ""}}
 					validate={async (values) => {
 						let errors = {}
@@ -93,12 +95,18 @@ function CarBookingForm() {
 						return errors
 					}}
 					onSubmit={(data) => {
-						if(car.bookingDetails.isBooked == false){
-							data.id = car.id
-							data.issueDate = moment(data.issueDate).format('DD/MM/YYYY')
-							data.returnDate = moment(data.returnDate).format('DD/MM/YYYY')
-							dispatch(booking(data))
-							setShowModal(true)
+						data.issueDate = moment(data.issueDate).format('YYYY-MM-DD')
+						data.returnDate = moment(data.returnDate).format('YYYY-MM-DD')
+						// data = JSON.stringify(data)
+						if(car.isBooked == false){
+							axios.patch(`/api/car/${id}/book/`, data ).then((response) => {
+								console.log(response);
+								
+								dispatch(booking(response.data))
+								setShowModal(true)
+							}).catch((err) => {
+								console.log(err)
+							})
 						}
 					}}
 				>
@@ -132,17 +140,26 @@ function CarBookingForm() {
 					)}
 				</Formik>	
 				}
-					{(car.bookingDetails.isBooked) && <p className="already-booked">This car is already Booked</p>}
+					{(car.isBooked) && <p className="already-booked">This car is already Booked</p>}
 
 					<Modal style={customModalStyles} isOpen={showModal}>
-						<div className="modal-content-container">
-							<h3>Booking Confirmed !</h3>
-							<p>You have Booked <span>{car.carName}</span></p>
-							<p>For the duration <span>{car.bookingDetails.issueDate}</span>-<span>{car.bookingDetails.returnDate}</span></p>
-						</div>
+						{(car.isBooked) && 
+							<div className="modal-content-container">
+								<h3>Booking Confirmed !</h3>
+								<p>You have Booked <span>{car.carName}</span></p>
+								<p>For the duration 
+									<span>
+										{moment(car.bookingDetails[0].issueDate).format('DD/MM/YYYY')}
+									</span>-
+									<span>
+										{moment(car.bookingDetails[0].returnDate).format('DD/MM/YYYY')}
+									</span></p>
+							</div>
+						}
 						<Link to='/'>Continue</Link>
 					</Modal>
 			</div>
+			: <div className="car-booking-form">Loading...</div>}
 		</div>
   );
 }
