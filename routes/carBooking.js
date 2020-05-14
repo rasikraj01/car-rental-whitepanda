@@ -40,21 +40,20 @@ router.post('/car/:id/book/', async (req, res) => {
 
 // update a booking
 router.put('/car/:id/book/update/', async (req, res) => {
-    let isAlreadyBooked = await Car.findOne({_id : req.params.id})
-
-    if(isAlreadyBooked.isBooked)
+    let currentCar = await Car.findOne({_id : req.params.id})
+    let bookingId =  currentCar.bookingDetails[0]._id
+    
+    if(currentCar.isBooked)
     {
         try{
-            const carUpdatedDetails = await Car.findByIdAndUpdate(
-                    req.params.id, 
+            const carUpdatedDetails = await Car.findOneAndUpdate(
+                    {"bookingDetails._id" : bookingId},
                     {
                     $set : {
-                        bookingDetails : {
-                            name :  req.body.name,
-                            phoneNumber: req.body.phoneNumber,
-                            issueDate:req.body.issueDate,
-                            returnDate: req.body.returnDate
-                            }
+                        "bookingDetails.$.name" : req.body.name,
+                        "bookingDetails.$.phoneNumber" : req.body.phoneNumber,
+                        "bookingDetails.$.issueDate" :req.body.issueDate,
+                        "bookingDetails.$.returnDate" : req.body.returnDate
                         }
                     },
                     {new:true}
