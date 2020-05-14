@@ -39,7 +39,7 @@ router.post('/car/:id/book/', async (req, res) => {
 })
 
 // update a booking
-router.patch('/car/:id/book/update/', async (req, res) => {
+router.put('/car/:id/book/update/', async (req, res) => {
     let isAlreadyBooked = await Car.findOne({_id : req.params.id})
 
     if(isAlreadyBooked.isBooked)

@@ -73,7 +73,7 @@ function CarBookingUpdateForm() {
 						
 						if(car.isBooked == true){
 							axios
-								.patch(`/api/car/${id}/book/update/`, data )
+								.put(`/api/car/${id}/book/update/`, data )
 								.then((response) => {
 									console.log(response);
 									
