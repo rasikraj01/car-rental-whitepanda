@@ -32,7 +32,7 @@ router.patch('/car/:id/book/', async (req, res) => {
                 )
             res.send(carUpdatedDetails).status(200)
         }catch (err){
-            res.send(err).status(500)
+            res.send(err).status(400)
         }
     }
 
@@ -61,7 +61,7 @@ router.patch('/car/:id/book/update/', async (req, res) => {
                 )
             res.send(carUpdatedDetails).status(200)
         }catch (err){
-            res.send(err).status(500)
+            res.send(err).status(400)
         }
     }
 
@@ -92,7 +92,7 @@ router.delete('/car/:id/book/', async (req, res) => {
                 )
             res.send(deleteBookingDetails).status(200)
         }catch (err){
-            res.send(err).status(500)
+            res.send(err).status(400)
         }
     }
 
