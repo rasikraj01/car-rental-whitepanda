@@ -65,7 +65,7 @@ function CarBookingForm() {
 						// data = JSON.stringify(data)
 						if(car.isBooked == false){
 							axios
-								.patch(`/api/car/${id}/book/`, data )
+								.post(`/api/car/${id}/book/`, data )
 								.then((response) => {
 									if(response.status === 200){
 										dispatch(addBooking(response.data))
