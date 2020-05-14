@@ -93,9 +93,11 @@ router.put('/car/:id/book/update/', async (req, res) => {
 // delete a booking
 router.delete('/car/:id/book/', async (req, res) => {
     let currentCar = await Car.findOne({_id : req.params.id})
+
+    if (currentCar.isBooked === false) res.status(400).send({"error" : "No item found"})
+    
     let bookingId =  currentCar.bookingDetails[0]._id
 
-    if (currentCar === null) res.status(400).send({"error" : "No item found"})
     
     if(currentCar.isBooked){
         try{
