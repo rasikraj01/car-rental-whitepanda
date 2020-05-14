@@ -1,38 +1,48 @@
 const router = require('express').Router();
 
 const Car = require('../models/car');
+const validateData = require('../validations/validateData');
 
 // add a booking
 router.post('/car/:id/book/', async (req, res) => {
-    let isAlreadyBooked = await Car.findOne({_id : req.params.id})
+    let currentCar = await Car.findOne({_id : req.params.id})
 
-    if (isAlreadyBooked === null) res.status(400).send({"error" : "No item found"})
-    if(isAlreadyBooked.isBooked) 
+    if (currentCar === null) res.status(400).send({"error" : "No item found"})
+    if(currentCar.isBooked) 
     {
         res.status(400).send({"error": "Car is already Booked"})
     }
     else{
-        try{
-            const carUpdatedDetails = await Car.findByIdAndUpdate(
-                    req.params.id, 
-                    {
-                        $set : {
-                        isBooked: true,
-                     },
-                    $push : {
-                        bookingDetails : {
-                            name :  req.body.name,
-                            phoneNumber: req.body.phoneNumber,
-                            issueDate:req.body.issueDate,
-                            returnDate: req.body.returnDate
+        
+        let data = {
+            name :  req.body.name,
+            phoneNumber: req.body.phoneNumber,
+            issueDate:req.body.issueDate,
+            returnDate: req.body.returnDate
+            }
+        let errors = validateData(data);
+        // check if error object is empty
+        if(Object.keys(errors).length !== 0 && errors.constructor === Object) {
+            res.status(400).send(errors)
+        }
+        else{
+            try{
+                const carUpdatedDetails = await Car.findByIdAndUpdate(
+                        req.params.id, 
+                        {
+                            $set : {
+                            isBooked: true,
+                        },
+                        $push : {
+                            bookingDetails : data
                             }
-                        }
-                    },
-                    {new:true}
-                )
-            res.send(carUpdatedDetails).status(200)
-        }catch (err){
-            res.send(err).status(400)
+                        },
+                        {new:true}
+                    )
+                res.send(carUpdatedDetails).status(200)
+            }catch (err){
+                res.send(err).status(400)
+            }
         }
     }
 
@@ -45,22 +55,36 @@ router.put('/car/:id/book/update/', async (req, res) => {
     
     if(currentCar.isBooked)
     {
-        try{
-            const carUpdatedDetails = await Car.findOneAndUpdate(
-                    {"bookingDetails._id" : bookingId},
-                    {
-                    $set : {
-                        "bookingDetails.$.name" : req.body.name,
-                        "bookingDetails.$.phoneNumber" : req.body.phoneNumber,
-                        "bookingDetails.$.issueDate" :req.body.issueDate,
-                        "bookingDetails.$.returnDate" : req.body.returnDate
-                        }
-                    },
-                    {new:true}
-                )
-            res.send(carUpdatedDetails).status(200)
-        }catch (err){
-            res.send(err).status(400)
+
+        let data = {
+            name :  req.body.name,
+            phoneNumber: req.body.phoneNumber,
+            issueDate:req.body.issueDate,
+            returnDate: req.body.returnDate
+            }
+        let errors = validateData(data);
+        // check if error object is empty
+        if(Object.keys(errors).length !== 0 && errors.constructor === Object) {
+            res.status(400).send(errors)
+        }
+        else{
+            try{
+                const carUpdatedDetails = await Car.findOneAndUpdate(
+                        {"bookingDetails._id" : bookingId},
+                        {
+                        $set : {
+                            "bookingDetails.$.name" : req.body.name,
+                            "bookingDetails.$.phoneNumber" : req.body.phoneNumber,
+                            "bookingDetails.$.issueDate" :req.body.issueDate,
+                            "bookingDetails.$.returnDate" : req.body.returnDate
+                            }
+                        },
+                        {new:true}
+                    )
+                res.send(carUpdatedDetails).status(200)
+            }catch (err){
+                res.send(err).status(400)
+            }
         }
     }
 

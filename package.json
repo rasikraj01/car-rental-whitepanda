@@ -5,13 +5,14 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build:app" : "cd client && npm run build",
+    "build:app": "cd client && npm run build",
     "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
+    "moment": "^2.25.3",
     "mongoose": "^5.9.13",
     "nodemon": "^2.0.3"
   }
